@@ -4,12 +4,12 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import utils.PropertiesFile;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
+import static CommonData.Common.list_account;
 import static utils.WebElementActionUtil.*;
 
 public class ActionsLogin extends ElementsLogin{
@@ -17,11 +17,8 @@ public class ActionsLogin extends ElementsLogin{
     WebDriverWait wait = new WebDriverWait(driver,3000 );
     public void userLogin(){
         clickEl(wait,button_userLogin);
-        //Set giá trị vào file properties
-        PropertiesFile.setPropValue("email", "kietht@glab.vn");
-        // Đọc data từ file properties
-        enterText(wait,field_email, PropertiesFile.getPropValue("email"));
-        enterText(wait,field_password,PropertiesFile.getPropValue("password"));
+        enterText(wait,field_email,list_account.get(0).toString());
+        enterText(wait,field_password,list_account.get(1).toString());
         clickEl(wait,button_Login);
     }
     public String getTextNameLogin(){
