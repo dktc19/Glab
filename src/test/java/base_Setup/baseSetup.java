@@ -7,6 +7,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import utils.PropertiesFile;
 
 import java.util.concurrent.TimeUnit;
 
@@ -22,9 +23,11 @@ public class baseSetup {
     @BeforeSuite
     public void openDriverObject(){
         System.setProperty("webdriver.chrome.driver", driverPath);
+        // Gọi hàm để khởi tạo file properties
+        PropertiesFile.setPropertiesFile();
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get(baseUrl);
+        driver.get(PropertiesFile.getPropValue("url_Glab"));
         driver.manage().window().maximize();
     }
 

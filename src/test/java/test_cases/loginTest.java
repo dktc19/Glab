@@ -1,11 +1,13 @@
 package test_cases;
 
 import base_Setup.baseSetup;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 import pages_object.login.ActionsLogin;
 
-import static utils.WebElementActionUtil.*;
+import java.io.IOException;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 public class loginTest extends baseSetup {
     public ActionsLogin actionsLogin;
@@ -22,10 +24,11 @@ public class loginTest extends baseSetup {
         driver.close();
     }
     @Test
-    public void userLogin(){
+    public void userLogin() throws IOException {
         actionsLogin = new ActionsLogin();
         actionsLogin.userLogin();
         sleepTo(1000);
-        actionsLogin.getTextNameLogin();
+        assertThat(actionsLogin.getTextNameLogin()).isEqualTo("Hà Tuấn Kiệt");
+
     }
 }
